@@ -47,7 +47,7 @@ Care must be taken while modelling resettable and non-resettable follower flops 
 
 * Pros:
 
-Reset will not depend upon clock, Reset has heigher priority compared to inputs.
+Reset will not depend upon clock, Reset has heigher priority compared to inputs. Good to use when in case of dependent and gated clocks.
 
 * Cons:
 
