@@ -1,4 +1,15 @@
 # System Tasks
+
+## Table of Contents
+
+- [System Tasks used for displaying](#System-Tasks-used-for-displaying)
+- [System Tasks to get simulation time](#System-Tasks-to-get-simulation-time)
+- [System Tasks for simulation control](#System-Tasks-for-simulation-control)
+- [System Task for random number generation](#System-Task-for-random-number-generation)
+- [System Tasks for file handling](#System-Tasks-for-file-handling)
+- [System Tasks for command line input](#System-Tasks-for-command-line-input)
+
+
 ## System Tasks used for displaying
 
 $display is used to display data once, it and adds a newline character  
