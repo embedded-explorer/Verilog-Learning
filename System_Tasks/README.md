@@ -1,7 +1,7 @@
 # System Tasks
 ## System Tasks used for displaying
 
-$display is used to display data once, it and adds a newline character
+$display is used to display data once, it and adds a newline character  
 $write is used to display data once, it doesnot add newline character
 
 $strobe displays simulation data once at the end of current simulation time
