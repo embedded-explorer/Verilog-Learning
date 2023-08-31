@@ -1,23 +1,21 @@
 //--------------------------------------------------------------------------------
-// File         : pipo_tb.v
-// Dependencies : pipo.v
-// Description  : Testbench for 4-bit parallel in parallel out shift register
+// File         : sipo_tb.v
+// Dependencies : sipo.v
+// Description  : Testbench for 4-bit serial in parallel out shift register
 //--------------------------------------------------------------------------------
 
-module pipo_tb();
+module sipo_tb();
 
   // Signal Decleration
   reg        clk_i  ;
   reg        rst_i  ;
-  reg        load_i ;
-  reg  [3:0] data_i ;
+  reg        data_i ;
   wire [3:0] data_o ;
   
   // Instantiation
-  pipo dut(
+  sipo dut(
     .clk_i  (clk_i ),
     .rst_i  (rst_i ),
-    .load_i (load_i),
     .data_i (data_i),
     .data_o (data_o)
   );
@@ -39,29 +37,27 @@ module pipo_tb();
   endtask
   
   // Task for applying input
-  task apply_input(
-    input [3:0] in,
-	input       ld
-  );
+  task apply_input(input in);
     begin
 	  @(negedge clk_i);
-	  load_i = ld;
 	  data_i = in;
-	  @(negedge clk_i);
-	  load_i = 1'b0;
 	end
   endtask
   
   // Logic to drive inputs and check outputs
   initial begin
-    rst_i = 0; load_i = 0; data_i = 0; // Initialize to known values
+    rst_i = 0; data_i = 0; // Initialize to known values
     apply_rst(); // Apply Reset
-	apply_input(4'hA, 1);
-	repeat(3) @(posedge clk_i);
-	apply_input(4'h5, 0);
-	repeat(3) @(posedge clk_i);
-	apply_input(4'h6, 1);
-    #20 $finish;
+	apply_input(1); // LSB
+	apply_input(0);
+	apply_input(1);
+	apply_input(0); // MSB
+	repeat(4) @(posedge clk_i);
+	apply_input(0); // LSB
+	apply_input(1);
+	apply_input(1);
+	apply_input(0); // MSB
+    #40 $finish;
   end
 
 endmodule

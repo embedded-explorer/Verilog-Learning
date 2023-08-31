@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------
-// File         : pipo.v
+// File         : piso.v
 // Dependencies : 
-// Description  : 4-bit parallel in parallel out shift register
+// Description  : 4-bit parallel in serial out shift register
 //--------------------------------------------------------------------------------
 
-module comparator_4_bit(
+module piso(
   input            clk_i , // Clock
   input            rst_i , // Reset
   input            load_i, // Load eanble input
@@ -12,8 +12,9 @@ module comparator_4_bit(
   output           data_o  // Serial data output
 );
   
-  reg  [3:0] shift_reg;
+  reg  [3:0] shift_reg; // 4-bit shift register
   
+  // Assign output serial data
   assign data_o = shift_reg[0];
   
   // Sequential Logic
@@ -27,7 +28,7 @@ module comparator_4_bit(
         shift_reg <= data_i;
       end else begin
       // Shift data to right
-        shift_reg <= {1,b0, shift_reg[3:1]};
+        shift_reg <= {1'b0, shift_reg[3:1]};
       end
     end
   end

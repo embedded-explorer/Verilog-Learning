@@ -1,27 +1,24 @@
 //--------------------------------------------------------------------------------
-// File         : pipo.v
+// File         : sipo.v
 // Dependencies : 
-// Description  : 4-bit parallel in parallel out shift register
+// Description  : 4-bit serial in parallel out shift register
 //--------------------------------------------------------------------------------
 
-module pipo(
+module sipo(
   input            clk_i , // Clock
   input            rst_i , // Reset
-  input            load_i, // Load eanble input
-  input      [3:0] data_i, // Parallel data input
-  output reg [3:0] data_o  // Parallel data output
+  input            data_i, // Parallel data input
+  output reg [3:0] data_o  // Serial data output
 );
   
   // Sequential Logic
   always@(posedge clk_i)begin
     if(rst_i)begin
-	// Clear on reset
+    // Clear on reset
       data_o <= 'h0;
     end else begin
-	  if(load_i)begin
-	  // Load parallel data
-	    data_o <= data_i;
-	  end
+	// Right shift input serial data
+      data_o <= {data_i, data_o[3:1]};
     end
   end
   

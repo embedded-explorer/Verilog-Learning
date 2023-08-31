@@ -1,20 +1,20 @@
 //--------------------------------------------------------------------------------
-// File         : pipo_tb.v
-// Dependencies : pipo.v
-// Description  : Testbench for 4-bit parallel in parallel out shift register
+// File         : piso_tb.v
+// Dependencies : piso.v
+// Description  : Testbench for 4-bit parallel in serial out shift register
 //--------------------------------------------------------------------------------
 
-module pipo_tb();
+module piso_tb();
 
   // Signal Decleration
   reg        clk_i  ;
   reg        rst_i  ;
   reg        load_i ;
   reg  [3:0] data_i ;
-  wire [3:0] data_o ;
+  wire       data_o ;
   
   // Instantiation
-  pipo dut(
+  piso dut(
     .clk_i  (clk_i ),
     .rst_i  (rst_i ),
     .load_i (load_i),
@@ -57,11 +57,11 @@ module pipo_tb();
     rst_i = 0; load_i = 0; data_i = 0; // Initialize to known values
     apply_rst(); // Apply Reset
 	apply_input(4'hA, 1);
-	repeat(3) @(posedge clk_i);
+	repeat(4) @(posedge clk_i);
 	apply_input(4'h5, 0);
-	repeat(3) @(posedge clk_i);
+	repeat(4) @(posedge clk_i);
 	apply_input(4'h6, 1);
-    #20 $finish;
+    #40 $finish;
   end
 
 endmodule
