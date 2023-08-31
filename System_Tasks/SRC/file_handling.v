@@ -4,6 +4,8 @@
 // Description  : Demonstration of File Handling operations in verilog
 //--------------------------------------------------------------------------------
 
+/*
+// Writing to file
 module file_handling();
 
   integer fp_1, fp_2;
@@ -32,4 +34,22 @@ module file_handling();
   initial
     $fmonitor(comb, $stime, ": a = %d", a);
 
+endmodule
+*/
+
+// Memory initialization
+module file_handling();
+  
+  reg [7:0] mem8x8 [7:0]; // Declare 8x8 memory
+  integer fptr, i;
+  
+  initial begin
+    $readmemb("init8x8.txt", mem8x8); // Initialize memory
+	
+	// Display memory contents
+	for(i=0; i<8; i=i+1)
+	  $display("Mem[%0d] = %b", i, mem8x8[i]);
+
+  end
+  
 endmodule

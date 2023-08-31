@@ -227,6 +227,36 @@ endmodule
 fp_1 = 00000002, fp_2 = 00000004
 ```
 
+$readmemb and $readmemh system tasks can be used to initializa memories  
+start address needs to be specified using @ operator  
+```
+module file_handling();
+  
+  reg [7:0] mem8x8 [7:0]; // Declare 8x8 memory
+  integer fptr, i;
+  
+  initial begin
+    $readmemb("init8x8.txt", mem8x8); // Initialize memory
+	
+	// Display memory contents
+	for(i=0; i<8; i=i+1)
+	  $display("Mem[%0d] = %b", i, mem8x8[i]);
+
+  end
+  
+endmodule
+```
+```
+Mem[0] = xxxxxxxx
+Mem[1] = xxxxxxxx
+Mem[2] = 11111111
+Mem[3] = 01010101
+Mem[4] = 00000000
+Mem[5] = xxxxxxxx
+Mem[6] = xxxxzzzz
+Mem[7] = 1x1x1x1x
+```
+
 ## System Tasks for command line input
 
 $test$plusargs is used to pass string as command line argument  
